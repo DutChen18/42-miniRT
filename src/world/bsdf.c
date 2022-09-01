@@ -30,12 +30,10 @@ static t_vec
 static t_vec
 	f_bxdf_reflective_sample(const GLOBAL t_world *world, GLOBAL t_context *ctx, const GLOBAL t_bxdf_reflective *bxdf, t_world_hit hit, t_vec wi, t_vec *wo)
 {
-	(void)ctx;
-	(void) bxdf;
-	*wo = reflect(wi, hit.rel_shading_normal);
-	*wo = vec_norm(vec_add(*wo, vec_scale(rt_random_in_sphere(&ctx->seed), bxdf->fuzzy)));
-	*wo = clip(*wo, hit.rel_geometric_normal);
-	return (filter_sample(world, bxdf->base.tex, hit.hit.uv));
+	//*wo = reflect(wi, hit.rel_shading_normal);
+	//*wo = vec_norm(vec_add(*wo, vec_scale(rt_random_in_sphere(&ctx->seed), bxdf->fuzzy)));
+	//*wo = clip(*wo, hit.rel_geometric_normal);
+	//return (filter_sample(world, bxdf->base.tex, hit.hit.uv));
 }
 
 static t_vec
@@ -203,8 +201,8 @@ static t_vec
 		return (f_bxdf_diffuse_sample(world, ctx, (const GLOBAL t_bxdf_diffuse *) bxdf, hit, wiw, wow));
 	if (bxdf->type == RT_BXDF_REFLECTIVE)
 		return (f_bxdf_reflective_sample(world, ctx, (const GLOBAL t_bxdf_reflective *) bxdf, hit, wiw, wow));
-	if (bxdf->type == RT_BXDF_TRANSMISSIVE)
-		return (f_bxdf_transmissive_sample(world, ctx, trace_ctx, (const GLOBAL t_bxdf_transmissive *) bxdf, hit, wiw, wow));;
+	//if (bxdf->type == RT_BXDF_TRANSMISSIVE)
+	//	return (f_bxdf_transmissive_sample(world, ctx, trace_ctx, (const GLOBAL t_bxdf_transmissive *) bxdf, hit, wiw, wow));;
 	return vec_0();
 }
 

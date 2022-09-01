@@ -14,5 +14,5 @@ t_vec
 t_vec
 	filter_sample(const GLOBAL t_world *world, t_filter filter, t_vec2 uv)
 {
-	return (filter_sample_offset(world, filter, uv, vec2(0.0, 0.0)));
+	//return (filter_sample_offset(world, filter, uv, vec2(0.0, 0.0)));
 }
