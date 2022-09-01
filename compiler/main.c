@@ -114,6 +114,7 @@ int
 	status = clGetProgramBuildInfo(program, device, CL_PROGRAM_BUILD_LOG, size, str, NULL);
 	assert(status == CL_SUCCESS);
 	write(STDOUT_FILENO, str, size);
+	write(STDOUT_FILENO, "\n", 1);
 	free(str);
 	return (status == CL_BUILD_SUCCESS);
 }
@@ -262,7 +263,6 @@ cl_program
 	read_files(&strings, &lengths, files, count);
 	program = clCreateProgramWithSource(context, count, (const char **) strings, lengths, &status);
 	assert(status == CL_SUCCESS);
-	printf("build program %s\n", device_name(device));
 	status = clBuildProgram(program, 1, &device, BUILD_FLAGS, NULL, NULL);
 	free_files(strings, lengths, count);
 	return (program);
